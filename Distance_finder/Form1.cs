@@ -73,9 +73,11 @@ namespace Distance_finder
             double longitude_1 = 0.0;
             double latitude_2 = 0.0;
             double longitude_2 = 0.0;
-            int Check_1 = Get_lat_and_long(address_1.Text, ref latitude_1, ref longitude_1);
-            int Check_2 = Get_lat_and_long(address_2.Text, ref latitude_2, ref longitude_2);
-            if (Check_1 == 1 && Check_2 == 1)
+
+            bool Check_1 = Convert.ToBoolean(Get_lat_and_long(address_1.Text, ref latitude_1, ref longitude_1));
+            bool Check_2 = Convert.ToBoolean(Get_lat_and_long(address_2.Text, ref latitude_2, ref longitude_2));
+
+            if (Check_1 && Check_2)
             {
                 var R = 6371d;
                 var dLat = Deg2Rad(latitude_2 - latitude_1);
@@ -103,21 +105,11 @@ namespace Distance_finder
             {
                 double result = Find_distance();
                 if (result == -1)
-                {
-                    result_lable.Text = "One of the addresses is wrong";
-
-                }
+                {result_lable.Text = "One of the addresses is wrong";}
                 else
-                {
-
-                    result_lable.Text = "result: " + string.Format("{0:F2}", result) + " kilometers";
-
-                }
+                {result_lable.Text = "result: " + string.Format("{0:F2}", result) + " kilometers";}
             }
-            else
-            {
-                result_lable.Text = "One of the addresses is wrong";
-            }
+            else{result_lable.Text = "One of the addresses is wrong";}
 
         }
         private void Form1_Load(object sender, EventArgs e)
