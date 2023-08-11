@@ -69,8 +69,10 @@ namespace Distance_finder
         }
         private double Find_distance()
         {
+            //first adress
             double latitude_1 = 0.0;
             double longitude_1 = 0.0;
+            //second adress
             double latitude_2 = 0.0;
             double longitude_2 = 0.0;
 
@@ -105,11 +107,11 @@ namespace Distance_finder
             {
                 double result = Find_distance();
                 if (result == -1)
-                {result_lable.Text = "One of the addresses is wrong";}
+                { result_lable.Text = "One of the addresses is wrong"; }
                 else
-                {result_lable.Text = "result: " + string.Format("{0:F2}", result) + " kilometers";}
+                { result_lable.Text = "result: " + string.Format("{0:F3}", result) + " kilometers"; }
             }
-            else{result_lable.Text = "One of the addresses is wrong";}
+            else { result_lable.Text = "One of the addresses is wrong"; }
 
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -131,7 +133,5 @@ namespace Distance_finder
         {
 
         }
-
-
     }
 }
