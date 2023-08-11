@@ -1,7 +1,6 @@
 
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
-//Windows.UI.Xaml.Controls.Maps
 
 namespace Distance_finder
 {
@@ -65,6 +64,7 @@ namespace Distance_finder
         }
         private double Deg2Rad(double deg)
         {
+            //from degree to radius
             return deg * (Math.PI / 180d);
         }
         private double Find_distance()
@@ -75,10 +75,10 @@ namespace Distance_finder
             //second adress
             double latitude_2 = 0.0;
             double longitude_2 = 0.0;
-
+            //Check result
             bool Check_1 = Convert.ToBoolean(Get_lat_and_long(address_1.Text, ref latitude_1, ref longitude_1));
             bool Check_2 = Convert.ToBoolean(Get_lat_and_long(address_2.Text, ref latitude_2, ref longitude_2));
-
+            //find distance
             if (Check_1 && Check_2)
             {
                 var R = 6371d;
@@ -94,7 +94,7 @@ namespace Distance_finder
                 return d;
             }
 
-
+            //if Check was failed
             return -1;
         }
         public Form1()
@@ -103,9 +103,11 @@ namespace Distance_finder
         }
         private void Button_Click(object sender, EventArgs e)
         {
+            //print result
             if (address_1.Text != "" && address_2.Text != "")
             {
                 double result = Find_distance();
+                //check result
                 if (result == -1)
                 { result_lable.Text = "One of the addresses is wrong"; }
                 else
