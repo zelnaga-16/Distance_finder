@@ -10,33 +10,33 @@ namespace Distance_finder
     {
         private int Get_lat_and_long(String text, ref double latitude, ref double longitude)
         {
-            //Запрос к API геокодирования Google.
+            //Request to the Google Geocoding API.
             string url = string.Format(
             "https://maps.googleapis.com/maps/api/geocode/xml?address={0}&key=AIzaSyDrLdfidigCgTYWTN4l6T2N0J6pNRqZArY&sensor=true_or_false&language=ru",
             Uri.EscapeDataString(text));
 
-            //Выполняем запрос к универсальному коду ресурса (URI).
+            //Making a request to a Uniform Resource Identifier (URI).
             System.Net.HttpWebRequest request =
             (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
 
-            //Получаем ответ от интернет-ресурса.
+            //We receive a response from an Internet resource.
             System.Net.WebResponse response =
             request.GetResponse();
 
-            //Экземпляр класса System.IO.Stream
-            //для чтения данных из интернет-ресурса.
+            //An instance of the System.IO.Stream class
+            //to read data from an Internet resource.
             System.IO.Stream dataStream =
             response.GetResponseStream();
 
-            //Инициализируем новый экземпляр класса
-            //System.IO.StreamReader для указанного потока.
+            //Initializing a new class instance
+            //System.IO.StreamReader for the specified stream.
             System.IO.StreamReader sreader =
             new System.IO.StreamReader(dataStream);
 
-            //Считывает поток от текущего положения до конца.
+            //Reads the stream from the current position to the end.
             string responsereader = sreader.ReadToEnd();
 
-            //Закрываем поток ответа.
+            //Closing the response stream.
             response.Close();
 
             System.Xml.XmlDocument xmldoc =
@@ -47,14 +47,10 @@ namespace Distance_finder
             if (xmldoc.GetElementsByTagName("status")[0].ChildNodes[0].InnerText == "OK")
             {
 
-                //Получение широты и долготы.
+                //Getting latitude and longitude.
                 System.Xml.XmlNodeList nodes =
                 xmldoc.SelectNodes("//location");
-
-                //Переменные широты и долготы.
-
-
-                //Получаем широту и долготу.
+                //Get latitude and longitude.
                 foreach (System.Xml.XmlNode node in nodes)
                 {
                     latitude =
